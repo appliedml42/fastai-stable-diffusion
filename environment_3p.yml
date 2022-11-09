@@ -1,0 +1,27 @@
+name: fastai-stable-diffusion-3p
+
+channels:
+  - pytorch
+  - huggingface
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  - black=22.10.0 
+  - diffusers=0.6.0
+  - jupyterlab_code_formatter=1.5.3
+  - glances[all]=3.3.0.2
+  - transformers=4.24.0
+  - ftfy=6.1.1
+  - ipywidgets=8.0.2
+  - isort=5.10.1
+  - jsonargparse=4.16.0
+  - jupyterlab=3.5.0
+  - pytorch=1.13.0
+  - pytorch-cuda=11.7
+  - py3nvml=0.2.6
+  - scipy=1.9.3
+  - tensorboard=2.6.0
+  - torchvision=0.14.0
+
