@@ -53,9 +53,9 @@ class QuickDraw(Dataset):
             """
             image = np.memmap(
                 reader, dtype="uint8", mode="r", shape=(md.num_rows, md.width)
-            )[li]
+            )[li].copy()
             # Need to research if this is the best way to do this!
-            image = torch.asarray(image, copy=True)
+            #image = torch.asarray(image, copy=True)
 
         category = md.npy_path.stem
         category_id = self.categories[self.categories.cat == category].cat_id.tolist()[
