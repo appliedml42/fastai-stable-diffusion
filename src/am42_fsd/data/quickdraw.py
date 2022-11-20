@@ -40,7 +40,7 @@ class QuickDraw(Dataset):
     def __len__(self):
         return self.length
 
-    def __getitem__(self, gi):
+    def _get_single_item(self, gi):
         md = self.index.iloc[self.index.length.searchsorted(gi, side="right")]
         offset = md.length - md.num_rows
         li = gi - offset
@@ -54,8 +54,6 @@ class QuickDraw(Dataset):
             image = np.memmap(
                 reader, dtype="uint8", mode="r", shape=(md.num_rows, md.width)
             )[li].copy()
-            # Need to research if this is the best way to do this!
-            #image = torch.asarray(image, copy=True)
 
         category = md.npy_path.stem
         category_id = self.categories[self.categories.cat == category].cat_id.tolist()[
@@ -63,3 +61,11 @@ class QuickDraw(Dataset):
         ]
 
         return image, category_id
+
+    def __getitem__(self, gi):
+        if isinstance(gi, list):
+            data = [self._get_single_item(idx) for idx in gi]
+            images, cat_ids = np.vstack([x[0] for x in data]), np.hstack([x[1] for x in data])
+            return images, cat_ids
+        else:
+            return self._get_single_item(gi)
