@@ -1,0 +1,8 @@
+black==22.10.0
+fairscale==0.4.12
+glances[all]==3.3.0.2
+jsonargparse[signatures]==4.16.0
+names==0.3.0
+wandb==0.13.5
+zstandard==0.19.0
+pytorch-lightning==1.8.2
