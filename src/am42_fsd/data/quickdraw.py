@@ -44,6 +44,11 @@ class QuickDraw(Dataset):
         md = self.index.iloc[self.index.length.searchsorted(gi, side="right")]
         offset = md.length - md.num_rows
         li = gi - offset
+        
+        category = md.npy_path.stem
+        category_id = self.categories[self.categories.cat == category].cat_id.tolist()[
+            0
+        ]
 
         with open(md.npy_path.as_posix(), "r") as reader:
             """
@@ -54,11 +59,6 @@ class QuickDraw(Dataset):
             image = np.memmap(
                 reader, dtype="uint8", mode="r", shape=(md.num_rows, md.width)
             )[li].copy()
-
-        category = md.npy_path.stem
-        category_id = self.categories[self.categories.cat == category].cat_id.tolist()[
-            0
-        ]
 
         return image, category_id
 
